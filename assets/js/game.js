@@ -1,4 +1,4 @@
-window.alert("Welcome to Robot Gladiators!");
+//window.alert("Welcome to Robot Gladiators!");
 var playerName = window.prompt("What's your robot's name?");
 var playerHealth = 100;
 var playerAttack = 10;
@@ -12,6 +12,7 @@ var enemyAttack = 12;
   console.log(enemyNames[i] + " is at " + i + " index");
 }*/
 var fight = function(enemyName) {
+  while(enemyHealth > 0) {
     var promptFight = window.prompt("Would you like to fight or skip this battle? Enter 'fight' or 'skip' to choose.");
     if (promptFight === "fight" || promptFight === "FIGHT") {
      //Subtract the value of `playerAttack` from the value of `enemyHealth` and use that result to update the value in the `enemyHealth` variable
@@ -53,8 +54,13 @@ else {
 } else {
     window.alert("You need to choose a valid option. Try again!");
   }
-};
+
+} //end of while loop
+}; //end of fight function
 for(var i = 0; i < enemyNames.length; i++) {
-fight(enemyNames[i]);
+  var pickedEnemyName = enemyNames[i];
+  enemyHealth = 50;
+fight(pickedEnemyName);
+
 }
 fight();
