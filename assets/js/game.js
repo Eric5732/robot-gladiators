@@ -53,11 +53,18 @@ if (playerHealth <= 0) {
 }
 else {
     window.alert(playerName + " still has " + playerHealth + " health left.");
+  
 }
     }
 } //end of while loop
 }; //end of fight function
-for(var i = 0; i < enemyNames.length; i++) {
+//function to start a new game
+var startGame = function() {
+  //reset player stats
+  playerHealth = 100;
+  playerAttack = 10;
+  playerMoney = 10;
+for (var i = 0; i < enemyNames.length; i++) {
   if (playerHealth > 0) {
   window.alert(" Round " + (i + 1));
   var pickedEnemyName = enemyNames[i];
@@ -66,6 +73,26 @@ fight(pickedEnemyName);
   }
   else {
     window.alert("You have lost your robot in battle! Game over!");
-break;
+    break;
   }
 }
+  endGame();
+//startGame();  
+};
+var endGame = function() {
+  if (playerHealth > 0) {
+    window.alert("Great job, you've survived the game! You now have a score of " + playerMoney + ".");
+  }
+  else {
+    window.alert("You've lost your robot in battle. Game over.");
+  }
+var playAgainConfirm = window.confirm("Would you like to play again?");
+if (playAgainConfirm) {
+  startGame();
+}
+else {
+  window.alert("Thanks for playing!");
+  
+}
+};
+startGame();
