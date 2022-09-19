@@ -6,11 +6,11 @@ var playerMoney = 10;
 var enemyNames = ["Roberto", "Amy Android", "Robo Trumble"];
 var enemyHealth = 50;
 var enemyAttack = 12;
-/*for(var i = 0; i < enemyNames.length; i++) {
-  console.log(enemyNames[i]);
-  console.log(i);
-  console.log(enemyNames[i] + " is at " + i + " index");
-}*/
+//function to generate a random numeric value
+var randomNumber = function(min, max) {
+  var value = Math.floor(Math.random() * (max - min + 1) + min);
+  return value;
+}
 var fight = function(enemyName) {
   while(playerHealth > 0 && enemyHealth > 0) {
     var promptFight = window.prompt("Would you like to fight or skip this battle? Enter 'fight' or 'skip' to choose.");
@@ -26,7 +26,8 @@ if (confirmSkip) {
     //if fight
     if (promptFight === "fight" || promptFight === "FIGHT") {
      //Subtract the value of `playerAttack` from the value of `enemyHealth` and use that result to update the value in the `enemyHealth` variable
-    enemyHealth = enemyHealth - playerAttack;
+    var damage = randomNumber(playerAttack - 3, playerAttack);
+    enemyHealth = Math.max(0, enemyHealth - damage);
   // Log a resulting message to the console so we know that it worked.
     console.log(
     playerName + " attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " health remaining."
@@ -41,7 +42,8 @@ else {
 }
 
   // Subtract the value of `enemyAttack` from the value of `playerHealth` and use that result to update the value in the `playerHealth` variable.
-        playerHealth = playerHealth - enemyAttack;
+    var damage = randomNumber(enemyAttack - 3, enemyAttack);
+    playerHealth = Math.max(0, playerHealth - damage);
   // Log a resulting message to the console so we know that it worked.
   console.log(
     enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining."
@@ -58,6 +60,7 @@ else {
     }
 } //end of while loop
 }; //end of fight function
+
 //function to start a new game
 var startGame = function() {
   //reset player stats
@@ -68,7 +71,7 @@ for (var i = 0; i < enemyNames.length; i++) {
   if (playerHealth > 0) {
   window.alert(" Round " + (i + 1));
   var pickedEnemyName = enemyNames[i];
-  enemyHealth = 50;
+  enemyHealth = randomNumber(40, 60);
 fight(pickedEnemyName);
 //if not at last enemy in array
 if (playerHealth > 0 && i < enemyNames.length - 1) {
@@ -115,7 +118,7 @@ switch (shopOptionPrompt) {
     if (playerMoney >=7) {
     window.alert("Refilling player's health by 20 for 7 moneys.");
 playerHealth = playerHealth +20;
-playerMoney = playerMoney - 7;
+playerMoney = Math.max(0, playerMoney - 7);
     }
     else {
       window.alert("You don't have enough moneys.");
